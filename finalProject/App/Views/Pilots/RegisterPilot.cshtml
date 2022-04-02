@@ -1,0 +1,43 @@
+@model App.ViewModels.RegisterPilot
+@{
+    ViewData["Title"] = "RegisterPilot";
+}
+
+<h1>RegisterPilot</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PilotFirstName" class="control-label"></label>
+                <input asp-for="PilotFirstName" class="form-control" />
+                <span asp-validation-for="PilotFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotLastName" class="control-label"></label>
+                <input asp-for="PilotLastName" class="form-control" />
+                <span asp-validation-for="PilotLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotBirthDay" class="control-label"></label>
+                <input asp-for="PilotBirthDay" class="form-control" />
+                <span asp-validation-for="PilotBirthDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotEmail" class="control-label"></label>
+                <input asp-for="PilotEmail" class="form-control" />
+                <span asp-validation-for="PilotEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotPassword" class="control-label"></label>
+                <input asp-for="PilotPassword" class="form-control" />
+                <span asp-validation-for="PilotPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
