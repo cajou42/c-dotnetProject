@@ -23,6 +23,9 @@
             <th>
                 Date
             </th>
+            <th>
+                Number of Place
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,6 +40,9 @@
             </td>
             <td>
                 @item.EventDate.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

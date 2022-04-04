@@ -12,5 +12,9 @@ namespace App.ViewModels
         [DataType(DataType.DateTime)]
         [Required]
         public DateTime RaceEventDate { get; set; }
+
+        [Required(ErrorMessage = "il faut un nombre de participants")]
+        [Range(10, 30, ErrorMessage = "Nombre de participants invalide")]
+        public int RacePlace { get; set; }
     }
 }
