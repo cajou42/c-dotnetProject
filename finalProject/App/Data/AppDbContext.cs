@@ -6,6 +6,8 @@ namespace App.Data
     {
         public DbSet<Race> Races {get;set;}
         public DbSet<Pilot> Pilots {get;set;}
+        public DbSet<RaceResult> RaceResults { get; set; }
+        public DbSet<ResultLine> ResultLines { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
