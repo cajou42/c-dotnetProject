@@ -40,7 +40,7 @@ namespace App.Controllers
                         );
                         _dbContext.SaveChanges();
 
-                    return RedirectToAction(nameof(HomeController));
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
 
                 return View("RegisterPilot");
