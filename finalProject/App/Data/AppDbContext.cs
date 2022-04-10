@@ -4,6 +4,7 @@ namespace App.Data
 {
     public class AppDbContext : DbContext
     {
+        public DbSet<Car> Car { get; set; }
         public DbSet<Race> Races {get;set;}
         public DbSet<Pilot> Pilots {get;set;}
         public DbSet<RaceResult> RaceResults { get; set; }

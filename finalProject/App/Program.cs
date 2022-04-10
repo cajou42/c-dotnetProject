@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = "server=localhost;port=9000;user=root;password=example;database=app_db";
+var connectionString = "server=localhost;port=9090;user=root;password=example;database=app_db";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 builder.Services.AddDbContext<AppDbContext>(
     dbContextOptions => dbContextOptions
@@ -50,6 +50,7 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Seed();
     // TODO SEED DATA
 }
 app.Run();
