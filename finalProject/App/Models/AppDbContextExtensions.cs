@@ -22,7 +22,7 @@ namespace App.Data
                 },
                 new Car() 
                 {
-                    Id = 1,
+                    Id = 2,
                     Categorie = "Camion",
                     ConstructionYear = new DateTime(2000,01,01),
                     Brand = "test",
@@ -33,7 +33,7 @@ namespace App.Data
                 },                
                 new Car() 
                 {
-                    Id = 1,
+                    Id = 3,
                     Categorie = "Tracteur",
                     ConstructionYear = new DateTime(2000,01,01),
                     Brand = "test",
