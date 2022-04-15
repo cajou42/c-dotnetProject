@@ -1,10 +1,15 @@
+using App.data.Repositories;
 using App.Data;
+using App.Models;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IRepository<Race>, EFRaceRepository>();
+
 var connectionString = "server=localhost;port=3306;user=root;password=example;database=app_db";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
 builder.Services.AddDbContext<AppDbContext>(
     dbContextOptions => dbContextOptions
         .UseMySql(connectionString, serverVersion)
