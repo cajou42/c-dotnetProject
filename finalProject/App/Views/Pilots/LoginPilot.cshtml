@@ -1,0 +1,23 @@
+@model App.ViewModels.LoginPilot
+@{
+    ViewData["Title"] = "LoginPilot";
+}
+
+<h1>LoginPilot</h1>
+
+<form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PilotEmail" class="control-label"></label>
+                <input asp-for="PilotEmail" class="form-control" />
+                <span asp-validation-for="PilotEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="login" class="btn btn-primary" />
+            </div>
+        </form>

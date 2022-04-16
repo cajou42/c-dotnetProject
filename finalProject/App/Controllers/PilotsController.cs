@@ -3,13 +3,14 @@ using App.Data;
 using App.ViewModels;
 using App.Models;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App.Controllers
 {
     public class PilotsController : Controller
     {
-        const string SessionName = "_Name";  
-        const string SessionAge = "_Age";  
         private readonly AppDbContext _dbContext;
         public PilotsController(AppDbContext dbContext)
         {
@@ -42,12 +43,9 @@ namespace App.Controllers
                         }
                         );
                         _dbContext.SaveChanges();
-
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
-
                 return View("RegisterPilot");
-
             }
             catch
             {
@@ -58,17 +56,47 @@ namespace App.Controllers
         // GET: Pilots/Profile
         [HttpGet]
         public ActionResult Profile(){
-            //HttpContext.Session.GetInt32("Id")
-            Pilot pilot = _dbContext.Pilots.Find(1);
-            var pilotProfile = new ProfilePilot(
-                pilot.FirstName,
-                pilot.Email
-            );
-            ISession session = HttpContext.Session;
-            // var val = HttpContext.User.Identity.Name;
-            HttpContext.Session.SetString(SessionName, pilot.FirstName);  
-            HttpContext.Session.SetInt32(SessionAge, 24);  
-            return View("ProfilePilot", pilotProfile);
+            ViewBag.Email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            ViewBag.Name = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            ViewBag.BirthDay = HttpContext.User.FindFirst(ClaimTypes.DateOfBirth).Value;
+            return View("ProfilePilot");
+        }
+
+
+        // GET: Pilots/Login
+        [HttpGet]
+        public ActionResult Login(){
+            return View("LoginPilot");
+        }
+
+        //POST: Pilots/Login
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginPilot Lpilot){
+
+            if(Lpilot == null){
+                return View("LoginPilot");
+            }
+            try
+            {
+                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == Lpilot.PilotEmail && p.Password == Lpilot.Password);
+                Console.WriteLine(pilot.LastName);
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, pilot.Email),
+                        new Claim(ClaimTypes.Name, pilot.FirstName + " " + pilot.LastName),
+                        new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme, 
+                        new ClaimsPrincipal(claimsIdentity));
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            catch
+            {
+                return View("LoginPilot");
+            }
         }
     }
 }
