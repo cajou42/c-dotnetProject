@@ -98,6 +98,68 @@ namespace App.Controllers
                 return View("LoginPilot");
             }
         }
+
+        // GET: Pilots/Edit
+        [HttpGet]
+        public ActionResult Edit(){
+            ViewBag.Name = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            return View("EditPilot");
+        }
+
+        // POST: Pilots/Edit
+        [HttpPost]
+        public async Task<ActionResult> EditName(EditPilot Edit)
+        {
+            try
+            {
+                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
+                pilot.FirstName = Edit.FirstName;
+                _dbContext.SaveChanges();
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, pilot.Email),
+                        new Claim(ClaimTypes.Name, Edit.FirstName + " " + pilot.LastName),
+                        new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme, 
+                        new ClaimsPrincipal(claimsIdentity));
+                return View("EditPilot");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditLastName(EditPilot Edit)
+        {
+            try
+            {
+                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
+                pilot.LastName = Edit.LastName;
+                _dbContext.SaveChanges();
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, pilot.Email),
+                        new Claim(ClaimTypes.Name, pilot.FirstName + " " + Edit.LastName),
+                        new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme, 
+                        new ClaimsPrincipal(claimsIdentity));
+                return View("EditPilot");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
 
