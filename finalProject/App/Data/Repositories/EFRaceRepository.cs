@@ -3,7 +3,7 @@ using App.Models;
 
 namespace App.data.Repositories
 {
-    public class EFRaceRepository : IRepository<Race>
+    public class EFRaceRepository : IRaceRepository
     {
         private static EFRaceRepository instance;
         static EFRaceRepository GetInstance()
@@ -39,6 +39,22 @@ namespace App.data.Repositories
         public int Save()
         {
             return _dbContext.SaveChanges();
+        }
+        
+        public IEnumerable<Race> ThreeNextRaces() 
+        {
+            return (from race in _dbContext.Races
+                   where race.EventDate > DateTime.Now
+                   orderby race.EventDate
+                   select race).Take(3);
+        }
+
+        public Race LastRace()
+        {
+            return _dbContext.Races
+                    .Where(race => race.EventDate > DateTime.Now)
+                    .OrderBy(race => race.EventDate)
+                    .FirstOrDefault();
         }
     }
 }

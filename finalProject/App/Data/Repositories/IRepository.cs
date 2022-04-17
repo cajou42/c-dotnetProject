@@ -16,4 +16,10 @@ namespace App.data.Repositories
     {
         RaceResult GetRaceResultWithWinnerDriver(int id);
     }
+
+    public interface IRaceRepository : IRepository<Race>
+    {
+        IEnumerable<Race> ThreeNextRaces();
+        Race LastRace();
+    }
 }
