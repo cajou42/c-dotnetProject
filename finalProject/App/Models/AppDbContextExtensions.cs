@@ -82,21 +82,41 @@ namespace App.Data
             dbContext.Pilots.AddRange(pilot);
 
 
-            var race = new Race()
-            {
-                Id = 1,
-                Name = "test",
-                EventDate = new DateTime(2022,05,01)
+            var races = new List<Race>() {
+                new Race()
+                {
+                    Id = 1,
+                    Name = "Pepsi Racing",
+                    EventDate = new DateTime(2022,05,01)
+                },
+                new Race()
+                {
+                    Id = 2,
+                    Name = "Les fous du volants",
+                    EventDate = new DateTime(2022,04,21)
+                },
+                new Race()
+                {
+                    Id = 1,
+                    Name = "Route arc en ciel",
+                    EventDate = new DateTime(2021,05,01)
+                },
+                new Race()
+                {
+                    Id = 1,
+                    Name = "Sonic Racing",
+                    EventDate = new DateTime(2022,05,19)
+                }
             };
 
-            dbContext.Races.Add(race);
+            dbContext.Races.AddRange(races);
 
             var raceResult = new List<RaceResult>()
             {
                 new RaceResult()
                 {
                     Id = 1,
-                    Race = race
+                    Race = races[0]
                 }
             };
             dbContext.RaceResults.AddRange(raceResult);
