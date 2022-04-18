@@ -1,8 +1,47 @@
-﻿@{
+﻿@model App.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<table class="table">
+        <tr>
+            <td>
+                @Model.LastRace.Id
+            </td>
+            <td>
+                @Model.LastRace.Name
+            </td>
+            <td>
+                @Model.LastRace.EventDate
+            </td>
+        </tr>
+</table>
+
+@foreach (var item in Model.RaceList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @item.EventDate.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

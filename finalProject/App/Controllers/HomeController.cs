@@ -27,7 +27,7 @@ public class HomeController : Controller
             lastRace
         );
 
-        return View();
+        return View("Index", HomeViewModel);
     }
 
     public IActionResult Privacy()
