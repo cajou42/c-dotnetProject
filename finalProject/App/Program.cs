@@ -1,4 +1,6 @@
+using App.data.Repositories;
 using App.Data;
+using App.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +21,11 @@ var cookiePolicyOptions = new CookiePolicyOptions
     MinimumSameSitePolicy = SameSiteMode.Strict,
 };
 
+builder.Services.AddScoped<IRepository<Race>, EFRaceRepository>();
+
 var connectionString = "server=localhost;port=9000;user=root;password=example;database=app_db";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
 builder.Services.AddDbContext<AppDbContext>(
     dbContextOptions => dbContextOptions
         .UseMySql(connectionString, serverVersion)
@@ -68,6 +73,7 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Seed();
     // TODO SEED DATA
 }
 app.Run();
