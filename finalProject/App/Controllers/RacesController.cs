@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using App.Data;
 using App.data.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace App.Controllers
 {
@@ -19,6 +22,12 @@ namespace App.Controllers
         public RacesController(IRepository<Race> raceRepository)
         {
             _raceRepository = raceRepository;
+        }
+
+        private readonly AppDbContext _dbContext;
+        public RacesController(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
         }
 
         public ActionResult List()
@@ -131,17 +140,38 @@ namespace App.Controllers
         
         // GET: Races/Inscription/id
         [HttpGet]
-        public ActionResult Inscription(int id, IFormCollection collection)
+        public ActionResult Inscription(int id)
         {
+            return View("InscriptionRace");
+        }
+
+        // POST: Races/Inscription/id
+        [HttpPost]
+        public ActionResult Inscription(int id, IFormCollection collection){
             try
             {
+                var today = DateTime.Today;
+                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
+                Race race = _raceRepository.Find(id);
+                var age = today.Year - pilot.BirthDay.Year;
+                if(age < 18){
+                    ModelState.AddModelError(String.Empty, "You must be 18 years old to participate in a race");
+                }
+                if(race.Place == 0){
+                    ModelState.AddModelError(String.Empty, "the Race is complete");
+                }
+                else
+                {
+                    race.Place --;
+                }
                 return RedirectToAction(nameof(InscriptionRace), new { id = id });
             }
             catch
             {
-                return View();
+                return View("InscriptionRace");
             }
-            
         }
+
+
     }
 }
