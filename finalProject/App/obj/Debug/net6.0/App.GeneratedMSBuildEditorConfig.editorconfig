@@ -23,6 +23,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/louis/c-dotnetProject/finalProject/App/Views/Pilots/EditPilot.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGlsb3RzXEVkaXRQaWxvdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/louis/c-dotnetProject/finalProject/App/Views/Pilots/LoginPilot.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGlsb3RzXExvZ2luUGlsb3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/louis/c-dotnetProject/finalProject/App/Views/Pilots/ProfilePilot.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGlsb3RzXFByb2ZpbGVQaWxvdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/louis/c-dotnetProject/finalProject/App/Views/Pilots/RegisterPilot.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGlsb3RzXFJlZ2lzdGVyUGlsb3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
