@@ -128,5 +128,20 @@ namespace App.Controllers
                 return View();
             }
         }
+        
+        // GET: Races/Inscription/id
+        [HttpGet]
+        public ActionResult Inscription(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(InscriptionRace), new { id = id });
+            }
+            catch
+            {
+                return View();
+            }
+            
+        }
     }
 }
