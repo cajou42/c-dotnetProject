@@ -6,10 +6,13 @@ namespace App.ViewModels
     {
         public IEnumerable<Race> RaceList { get; }
         public Race LastRace { get; }
-        public HomeViewModel(IEnumerable<Race> races, Race lastRace) 
+
+        public string TimeNextRace { get; }
+        public HomeViewModel(IEnumerable<Race> races, Race lastRace, string timeNextRace ) 
         {
             RaceList = races;
             LastRace = lastRace;
+            TimeNextRace = timeNextRace;
         }
     }
 }
