@@ -40,6 +40,7 @@ namespace App.Controllers
                             BirthDay = pilot.PilotBirthDay,
                             Email = pilot.PilotEmail,
                             Password = pilot.PilotPassword,
+                            Car = GetRamdomCar(),
                         }
                         );
                         _dbContext.SaveChanges();
@@ -159,6 +160,13 @@ namespace App.Controllers
             {
                 return View();
             }
+        }
+
+        public Car GetRamdomCar(){
+            Random rnd = new Random();
+            int randomNumber = rnd.Next(1, _dbContext.Car.Count());
+            Car car = _dbContext.Car.Find(randomNumber);
+            return car;
         }
     }
 }
