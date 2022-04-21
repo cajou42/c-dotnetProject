@@ -7,22 +7,23 @@ using App.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using App.Data;
+using App.data.Repositories;
 
 namespace App.Controllers
 {
     public class RacesController : Controller
     {
-        private readonly AppDbContext _dbContext;
+        // private readonly AppDbContext _dbContext;
+        private readonly IRepository<Race> _raceRepository;
 
-        public RacesController(AppDbContext dbContext)
+        public RacesController(IRepository<Race> raceRepository)
         {
-            _dbContext = dbContext;
-
+            _raceRepository = raceRepository;
         }
 
         public ActionResult List()
         {
-            var races = _dbContext.Races.ToList();
+            var races = _raceRepository.GetAll();
 
 
             var raceListViewModel = new RaceListViewModel(
@@ -61,14 +62,14 @@ namespace App.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _dbContext.Races.Add(
+                    _raceRepository.Create(
                         new Race()
                         {
                             Name = race.RaceName,
                             EventDate = race.RaceEventDate
                         }
                         );
-                        _dbContext.SaveChanges();
+                        _raceRepository.Save();
 
                     return RedirectToAction(nameof(List));
                 }
