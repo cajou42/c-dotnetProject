@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRepository<Race>, EFRaceRepository>();
 
-var connectionString = "server=localhost;port=3306;user=root;password=example;database=app_db";
+var connectionString = "server=localhost;port=9000;user=root;password=example;database=app_db";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
 builder.Services.AddDbContext<AppDbContext>(
