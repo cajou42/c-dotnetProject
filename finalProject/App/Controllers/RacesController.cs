@@ -16,17 +16,12 @@ namespace App.Controllers
 {
     public class RacesController : Controller
     {
-        // private readonly AppDbContext _dbContext;
+        private readonly AppDbContext _dbContext;
         private readonly IRepository<Race> _raceRepository;
 
-        public RacesController(IRepository<Race> raceRepository)
+        public RacesController(IRepository<Race> raceRepository, AppDbContext dbContext)
         {
             _raceRepository = raceRepository;
-        }
-
-        private readonly AppDbContext _dbContext;
-        public RacesController(AppDbContext dbContext)
-        {
             _dbContext = dbContext;
         }
 
@@ -148,30 +143,35 @@ namespace App.Controllers
         // POST: Races/Inscription/id
         [HttpPost]
         public ActionResult Inscription(int id, IFormCollection collection){
+            ClaimsPrincipal currentUser = this.User;
+            var birth = DateTime.Parse(currentUser.FindFirst(ClaimTypes.DateOfBirth).Value);
+            var user = _dbContext.Pilots.FirstOrDefault(u => u.BirthDay == birth);
+            var today = DateTime.Today;
+            Race race = _raceRepository.Find(id);
+            var age = today.Year - birth.Year;
             try
             {
-                var today = DateTime.Today;
-                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
-                Race race = _raceRepository.Find(id);
-                var age = today.Year - pilot.BirthDay.Year;
                 if(age < 18){
-                    ModelState.AddModelError(String.Empty, "You must be 18 years old to participate in a race");
+                    ModelState.AddModelError(nameof(InscriptionRace.age), "You must be 18 years old to participate in a race");
+                    return View("InscriptionRace");
                 }
                 if(race.Place == 0){
-                    ModelState.AddModelError(String.Empty, "the Race is complete");
+                    ModelState.AddModelError(nameof(InscriptionRace.nbParticipants), "the Race is complete");
+                    return View("InscriptionRace");
                 }
                 else
                 {
                     race.Place --;
+                    user.Race = race;
+                    _raceRepository.Save();
+                    _dbContext.SaveChanges();
                 }
-                return RedirectToAction(nameof(InscriptionRace), new { id = id });
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View("InscriptionRace");
             }
         }
-
-
     }
 }

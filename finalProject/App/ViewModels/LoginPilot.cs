@@ -5,7 +5,8 @@ namespace App.ViewModels
     {
         [Required(ErrorMessage = "Email requis")]
         public string? PilotEmail{ get; set; }
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Mot de passe requis")]
-        public string? Password { get; set; }
+        public string? PPassword { get; set; }
     }
 }

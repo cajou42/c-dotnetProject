@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using App.Models.ClaimTypesModels;
 
 namespace App.Controllers
 {
@@ -41,6 +42,7 @@ namespace App.Controllers
                             Email = pilot.PilotEmail,
                             Password = pilot.PilotPassword,
                             Car = GetRamdomCar(),
+                            Race =  _dbContext.Races.Find(1),
                         }
                         );
                         _dbContext.SaveChanges();
@@ -60,6 +62,8 @@ namespace App.Controllers
             ViewBag.Email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
             ViewBag.Name = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             ViewBag.BirthDay = HttpContext.User.FindFirst(ClaimTypes.DateOfBirth).Value;
+            ViewBag.Car = HttpContext.User.FindFirst("Car").Value;
+            ViewBag.RaceInscription = HttpContext.User.FindFirst("InscriptionRace").Value;
             return View("ProfilePilot");
         }
 
@@ -79,13 +83,17 @@ namespace App.Controllers
             }
             try
             {
-                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == Lpilot.PilotEmail && p.Password == Lpilot.Password);
-                Console.WriteLine(pilot.LastName);
+                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == Lpilot.PilotEmail && p.Password == Lpilot.PPassword);
+                Console.WriteLine(pilot.Car);
+                pilot.Car = GetRamdomCar();
+                pilot.Race = _dbContext.Races.Find(1);
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, pilot.Email),
                         new Claim(ClaimTypes.Name, pilot.FirstName + " " + pilot.LastName),
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                        new Claim("Car", pilot.Car.Model),
+                        new Claim("InscriptionRace", pilot.Race.Name),
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -121,6 +129,8 @@ namespace App.Controllers
                         new Claim(ClaimTypes.Email, pilot.Email),
                         new Claim(ClaimTypes.Name, Edit.FirstName + " " + pilot.LastName),
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                        new Claim("Car", pilot.Car.Model),
+                        new Claim("InscriptionRace", pilot.Race.Name),
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -148,6 +158,8 @@ namespace App.Controllers
                         new Claim(ClaimTypes.Email, pilot.Email),
                         new Claim(ClaimTypes.Name, pilot.FirstName + " " + Edit.LastName),
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
+                        new Claim("Car", pilot.Car.Model),
+                        new Claim("InscriptionRace", pilot.Race.Name),
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
