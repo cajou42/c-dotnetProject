@@ -16303,8 +16303,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Pilots\\EditPilot.cshtml",
+      "TargetPath": "Views\\Pilots\\EditPilot.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Pilots\\ProfilePilot.cshtml",
+      "TargetPath": "Views\\Pilots\\ProfilePilot.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16348,8 +16358,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Races\\InscriptionRace.cshtml",
+      "TargetPath": "Views\\Races\\InscriptionRace.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Races\\RaceList.cshtml",
       "TargetPath": "Views\\Races\\RaceList.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\louis\\c-dotnetProject\\finalProject\\App\\Views\\Pilots\\LoginPilot.cshtml",
+      "TargetPath": "Views\\Pilots\\LoginPilot.cshtml",
       "FileKind": "mvc"
     }
   ],

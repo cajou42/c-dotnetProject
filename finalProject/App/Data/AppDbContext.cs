@@ -7,6 +7,8 @@ namespace App.Data
         public DbSet<Car> Car { get; set; }
         public DbSet<Race> Races {get;set;}
         public DbSet<Pilot> Pilots {get;set;}
+//         public DbSet<Categorie> Categories {get;set;}
+
         public DbSet<RaceResult> RaceResults { get; set; }
         public DbSet<ResultLine> ResultLines { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
