@@ -5,14 +5,16 @@ namespace App.ViewModels
     public class HomeViewModel
     {
         public IEnumerable<Race> RaceList { get; }
-        public Race LastRace { get; }
 
         public string TimeNextRace { get; }
-        public HomeViewModel(IEnumerable<Race> races, Race lastRace, string timeNextRace ) 
+
+        public RaceResult LastRaceResult { get; }
+        public HomeViewModel(IEnumerable<Race> races, string timeNextRace, RaceResult lastRaceResult ) 
         {
             RaceList = races;
-            LastRace = lastRace;
+            LastRaceResult =  lastRaceResult;
             TimeNextRace = timeNextRace;
+            
         }
     }
 }

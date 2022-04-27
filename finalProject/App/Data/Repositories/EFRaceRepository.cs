@@ -1,7 +1,7 @@
 using App.Data;
 using App.Models;
 
-namespace App.data.Repositories
+namespace App.Data.Repositories
 {
     public class EFRaceRepository : IRaceRepository
     {

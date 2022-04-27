@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using App.Models;
-using App.data.Repositories;
+using App.Data.Repositories;
 using App.ViewModels;
 
 namespace App.Controllers;
@@ -10,22 +10,27 @@ public class HomeController : Controller
 {
     private readonly IRaceRepository _raceRepository;
     private readonly ILogger<HomeController> _logger;
+    private readonly IRaceResultRepository _raceResultRepository;
 
-    public HomeController(ILogger<HomeController> logger,IRaceRepository raceRepository)
+    public HomeController(ILogger<HomeController> logger,IRaceRepository raceRepository, IRaceResultRepository raceResultRepository)
     {
         _logger = logger;
         _raceRepository = raceRepository;
+        _raceResultRepository = raceResultRepository;
     }
 
     public IActionResult Index()
     {
         var races = _raceRepository.ThreeNextRaces();
-        var lastRace = _raceRepository.LastRace();
-        var timeNextRace = (races.First().EventDate - DateTime.Now);
+        var lastRaceResult = _raceResultRepository.GetLastRaceResult();
+        var timeNextRace = races.First().EventDate - DateTime.Now;
+        Console.WriteLine("================================================================");
+        Console.WriteLine(lastRaceResult.Race);
+        Console.WriteLine("================================================================");
         var HomeViewModel = new HomeViewModel(
             races,
-            lastRace,
-            ToReadableString(timeNextRace)
+            ToReadableString(timeNextRace),
+            lastRaceResult
         );
 
         return View("Index", HomeViewModel);

@@ -7,7 +7,7 @@ using App.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using App.Data;
-using App.data.Repositories;
+using App.Data.Repositories;
 
 namespace App.Controllers
 {

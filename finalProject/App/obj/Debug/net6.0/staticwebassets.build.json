@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xL7Fsp/n01dkfMU/bAfetKPWQZlJxGStNL5TVOOkWGw=",
+  "Hash": "H9BCfrqHdV7pq6S+bYAd1L7ktcMPrUVDK5EL2ud8abM=",
   "Source": "App",
   "BasePath": "_content/App",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\adrie\\Cours\\framework web\\c-dotnetProject\\finalProject\\App\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\App.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\adrie\\Cours\\framework web\\c-dotnetProject\\finalProject\\App\\wwwroot\\css\\carrousel.css",
+      "SourceId": "App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adrie\\Cours\\framework web\\c-dotnetProject\\finalProject\\App\\wwwroot\\",
+      "BasePath": "_content/App",
+      "RelativePath": "css/carrousel.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\carrousel.css"
     },
     {
       "Identity": "C:\\Users\\adrie\\Cours\\framework web\\c-dotnetProject\\finalProject\\App\\wwwroot\\css\\site.css",

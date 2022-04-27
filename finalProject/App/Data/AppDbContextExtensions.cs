@@ -116,11 +116,10 @@ namespace App.Data
                 new RaceResult()
                 {
                     Id = 1,
-                    Race = races[2]
+                    Race = races[2],
                 }
             };
             dbContext.RaceResults.AddRange(raceResult);
-
             var resultLines = new List<ResultLine>()
             {
                 new ResultLine()
@@ -145,6 +144,8 @@ namespace App.Data
                     RaceResult = raceResult[0]
                 }
             };
+
+
             dbContext.ResultLines.AddRange(resultLines);
             dbContext.SaveChanges();
         }

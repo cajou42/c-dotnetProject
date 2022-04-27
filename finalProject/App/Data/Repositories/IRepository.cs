@@ -1,6 +1,6 @@
 using App.Models;
 
-namespace App.data.Repositories
+namespace App.Data.Repositories
 {
     public interface IRepository<TModel> where TModel : class
     {
@@ -15,6 +15,7 @@ namespace App.data.Repositories
     public interface IRaceResultRepository : IRepository<RaceResult>
     {
         RaceResult GetRaceResultWithWinnerDriver(int id);
+        RaceResult GetLastRaceResult();
     }
 
     public interface IRaceRepository : IRepository<Race>
@@ -22,4 +23,6 @@ namespace App.data.Repositories
         IEnumerable<Race> ThreeNextRaces();
         Race LastRace();
     }
+
+
 }

@@ -17,6 +17,26 @@
         </tr>
 </table>
 
+<table class="table">
+    Résultat de la derniere courses :
+        <tr>
+            <td>
+                Nom :  @Model.LastRaceResult.Race.Name
+            </td>
+        </tr>
+        <tr>
+            @* @foreach (var item in @Model.LastRaceResult.Race.Name) {
+            <td>
+            </td>
+            } *@
+        </tr>
+                <tr>
+            <td>
+                Temps avant la prochaine courses :  @Model.TimeNextRace
+            </td>
+        </tr>
+</table>
+
 <div class="container">
 @foreach (var item in Model.RaceList) {
 
@@ -31,4 +51,3 @@
 }
     </tbody>
 </table>
-
