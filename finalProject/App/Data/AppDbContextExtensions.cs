@@ -1,4 +1,6 @@
 using App.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace App.Data
 {
@@ -66,6 +68,9 @@ namespace App.Data
 
             dbContext.Races.AddRange(race);
 
+            HashAlgorithm sha = SHA256.Create();
+            byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes("test"));
+            var str = System.Text.Encoding.Default.GetString(bytes);
             var pilot = new List<Pilot>()
             {
                 new Pilot() 
@@ -75,7 +80,7 @@ namespace App.Data
                     LastName = "Dupond",
                     BirthDay = new DateTime(1990,01,01),
                     Email = "Jean.Dupond@gmail.com",
-                    Password = "test",
+                    Password = str,
                     Car = car[1],
                     Race = race[0]
                 },
