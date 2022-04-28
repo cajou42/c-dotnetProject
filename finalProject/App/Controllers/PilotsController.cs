@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using App.Data;
+using App.Data.Repositories;
 using App.ViewModels;
 using App.Models;
 using Microsoft.AspNetCore.Http;
@@ -7,15 +8,23 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 //using App.Models.ClaimTypesModels;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace App.Controllers
 {
     public class PilotsController : Controller
     {
-        private readonly AppDbContext _dbContext;
-        public PilotsController(AppDbContext dbContext)
+        private readonly IPilotRepository _pilotRepository;
+        private readonly IRaceRepository _raceRepository;
+        private readonly IRepository<Car> _CarRepository;
+
+        private HashAlgorithm sha = SHA256.Create();
+        public PilotsController(IPilotRepository pilotRepository, IRaceRepository raceRepository, ICarRepository CarRepository)
         {
-            _dbContext = dbContext;
+            _pilotRepository = pilotRepository;
+            _raceRepository = raceRepository;
+            _CarRepository = CarRepository;
         }
 
         // GET: Pilots/Register
@@ -33,19 +42,21 @@ namespace App.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _dbContext.Pilots.Add(
+                    byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(pilot.PilotPassword));
+                    var hashPassword = System.Text.Encoding.Default.GetString(bytes);
+                    _pilotRepository.Create(
                         new Pilot()
                         {
                             FirstName = pilot.PilotFirstName,
                             LastName = pilot.PilotLastName,
                             BirthDay = pilot.PilotBirthDay,
                             Email = pilot.PilotEmail,
-                            Password = pilot.PilotPassword,
+                            Password = hashPassword,
                             Car = GetRamdomCar(),
-                            Race =  _dbContext.Races.Find(1),
+                            Race =  _raceRepository.Find(1),
                         }
                         );
-                        _dbContext.SaveChanges();
+                        _pilotRepository.Save();
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 return View("RegisterPilot");
@@ -83,10 +94,12 @@ namespace App.Controllers
             }
             try
             {
-                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == Lpilot.PilotEmail && p.Password == Lpilot.PPassword);
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(Lpilot.PPassword));
+                var hashPassword = System.Text.Encoding.Default.GetString(bytes);
+                Pilot pilot = _pilotRepository.GetPilotWithEmailAndPassword(Lpilot.PilotEmail, hashPassword);
                 Console.WriteLine(pilot.Car);
-                pilot.Car = GetRamdomCar();
-                pilot.Race = _dbContext.Races.Find(1);
+                //pilot.Car = GetRamdomCar();
+                pilot.Race = _raceRepository.Find(1);
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, pilot.Email),
@@ -94,6 +107,7 @@ namespace App.Controllers
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
                         new Claim("Car", pilot.Car.Model),
                         new Claim("InscriptionRace", pilot.Race.Name),
+                        new Claim("Hash", hashPassword)
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -121,9 +135,9 @@ namespace App.Controllers
         {
             try
             {
-                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
+                Pilot pilot = _pilotRepository.GetPilotWithEmailAndPassword(HttpContext.User.FindFirst(ClaimTypes.Email).Value, HttpContext.User.FindFirst("Hash").Value);
                 pilot.FirstName = Edit.FirstName;
-                _dbContext.SaveChanges();
+                _pilotRepository.Save();
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, pilot.Email),
@@ -131,6 +145,7 @@ namespace App.Controllers
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
                         new Claim("Car", pilot.Car.Model),
                         new Claim("InscriptionRace", pilot.Race.Name),
+                        new Claim("Hash", HttpContext.User.FindFirst("Hash").Value)
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -150,9 +165,8 @@ namespace App.Controllers
         {
             try
             {
-                Pilot pilot = _dbContext.Pilots.FirstOrDefault(p => p.Email == HttpContext.User.FindFirst(ClaimTypes.Email).Value);
-                pilot.LastName = Edit.LastName;
-                _dbContext.SaveChanges();
+                Pilot pilot = _pilotRepository.GetPilotWithEmailAndPassword(HttpContext.User.FindFirst(ClaimTypes.Email).Value, HttpContext.User.FindFirst("Hash").Value);                pilot.LastName = Edit.LastName;
+                _pilotRepository.Save();
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, pilot.Email),
@@ -160,6 +174,7 @@ namespace App.Controllers
                         new Claim(ClaimTypes.DateOfBirth, pilot.BirthDay.ToString()),
                         new Claim("Car", pilot.Car.Model),
                         new Claim("InscriptionRace", pilot.Race.Name),
+                        new Claim("Hash", HttpContext.User.FindFirst("Hash").Value)
                     };
                     var claimsIdentity = new ClaimsIdentity(
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -175,9 +190,10 @@ namespace App.Controllers
         }
 
         public Car GetRamdomCar(){
+            var cars = _CarRepository.GetAll();
             Random rnd = new Random();
-            int randomNumber = rnd.Next(1, _dbContext.Car.Count());
-            Car car = _dbContext.Car.Find(randomNumber);
+            int randomNumber = rnd.Next(1, cars.Count());
+            Car car = cars.FirstOrDefault(c => c.Id == randomNumber);
             return car;
         }
     }
