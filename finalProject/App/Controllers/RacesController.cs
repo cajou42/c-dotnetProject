@@ -23,7 +23,7 @@ namespace App.Controllers
         public RacesController(IRaceRepository raceRepository,IPilotRepository pilotRepository)
         {
             _raceRepository = raceRepository;
-            _pilotRepository = _pilotRepository;
+            _pilotRepository = pilotRepository;
         }
         
 
@@ -151,7 +151,7 @@ namespace App.Controllers
         public ActionResult Inscription(int id, IFormCollection collection){
             ClaimsPrincipal currentUser = this.User;
             var birth = DateTime.Parse(currentUser.FindFirst(ClaimTypes.DateOfBirth).Value);
-            var user = _pilotRepository.GetPilotWithBirthday(birth);
+            var user = _pilotRepository.GetPilotWithEmail(currentUser.FindFirst(ClaimTypes.Email).Value);
             var today = DateTime.Today;
             Race race = _raceRepository.Find(id);
             var age = today.Year - birth.Year;

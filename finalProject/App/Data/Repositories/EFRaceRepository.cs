@@ -44,9 +44,9 @@ namespace App.Data.Repositories
         public IEnumerable<Race> ThreeNextRaces() 
         {
             return (from race in _dbContext.Races
-                   where race.EventDate > DateTime.Now
-                   orderby race.EventDate
-                   select race).Take(3);
+                where race.EventDate > DateTime.Now
+                orderby race.EventDate
+                select race).Take(3);
         }
 
         public Race LastRace()

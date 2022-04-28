@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRaceRepository, EFRaceRepository>();
 builder.Services.AddScoped<IRaceResultRepository, EFRaceResultRepository>();
 builder.Services.AddScoped<IPilotRepository, EFPilotRepository>();
+builder.Services.AddScoped<ICarRepository, EFCarRepository>();
 // builder.Services.AddScoped<IRepository<Race>, EFRaceRepository>();
 // builder.Services.AddScoped<IRepository<Pilot>, EFPilotRepository>();
 

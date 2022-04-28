@@ -4,11 +4,9 @@ namespace App.Data.Repositories
 {
     public interface IRepository<TModel> where TModel : class
     {
-
         TModel Find(int id); 
         IEnumerable<TModel> GetAll(); 
         TModel Create(TModel model);
-
         int Save();
 
     }
@@ -25,8 +23,13 @@ namespace App.Data.Repositories
     }
     public interface IPilotRepository : IRepository<Pilot>
     {
-        Pilot GetPilotWithEmailAndPassword(String email, String password);
-        Pilot GetPilotWithBirthday(DateTime birthday);
+        Pilot GetPilotWithEmailAndPassword(string email, string password);
+        Pilot GetPilotWithEmail(string email);
+    }
+
+        public interface ICarRepository : IRepository<Car>
+    {
+        string Test();
     }
 
 

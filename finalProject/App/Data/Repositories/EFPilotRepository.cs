@@ -39,13 +39,13 @@ namespace App.Data.Repositories
         {
             return _dbContext.SaveChanges();
         }
-        public Pilot GetPilotWithEmailAndPassword(String email, String password)
+        public Pilot GetPilotWithEmailAndPassword(string email, string password)
         {
             return _dbContext.Pilots.SingleOrDefault(pilot => pilot.Email == email && pilot.Password == password);
         }
-        public Pilot GetPilotWithBirthday(DateTime birthday) 
+        public Pilot GetPilotWithEmail(string email) 
         {
-            return _dbContext.Pilots.SingleOrDefault(pilot => pilot.BirthDay == birthday);
+            return _dbContext.Pilots.SingleOrDefault(pilot => pilot.Email == email);
         }
     }
 }
