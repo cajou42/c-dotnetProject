@@ -26,7 +26,7 @@ namespace App.Controllers
             _pilotRepository = _pilotRepository;
         }
         
-        
+
         public ActionResult List()
         {
             var races = _raceRepository.GetAll();
@@ -41,10 +41,14 @@ namespace App.Controllers
         }
 
         // GET: Races/Details/5
-        public ActionResult Details(int id, string toto)
+        public ActionResult Details(int id)
         {
 
-            return View();
+            var detailRaceViewModel = new DetailRaceViewModel
+            (
+                _raceRepository.Find(id)
+            );
+            return View(detailRaceViewModel);
         }
 
         // GET: Races/Create

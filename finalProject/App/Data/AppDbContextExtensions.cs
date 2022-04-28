@@ -102,7 +102,7 @@ namespace App.Data
                     Longitude = 13.3f,
                     Latitude = 43.7f,
                     Place = 15,
-                    Image = "https://static.wikia.nocookie.net/mario/images/7/7c/MKT-Ic%C3%B4nePlayStore2.8.png/revision/latest?cb=20210519212100&path-prefix=fr",
+                    Image = "https://img.generation-nt.com/mario-kart-tour_05F4000001662811.jpg",
                     AgeLimit = 21,
                     Categories = categories
                 },
@@ -115,7 +115,7 @@ namespace App.Data
                     Longitude = 13.3f,
                     Latitude = 43.7f,
                     Place = 15,
-                    Image = "https://static.wikia.nocookie.net/wikidoublage/images/c/c0/Les_Fous_du_Volant.jpg/revision/latest?cb=20200824112837&path-prefix=fr",
+                    Image = "https://d2lv662meabn0u.cloudfront.net/boomerang/dynamic/show/00000000/795/6c17fb8340e5ed14c8eba597c48014bdf59fe484_1587660640.jpg",
                     AgeLimit = 21,
                     Categories = categories
                 }
