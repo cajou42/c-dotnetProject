@@ -37,12 +37,12 @@ namespace App.Data.Repositories
 
         public RaceResult GetLastRaceResult()
         {
-            // return _dbContext.RaceResults
-            //         .Where(raceResult => raceResult.Race.EventDate > DateTime.Now)
-            //         .OrderBy(raceResult => raceResult.Race.EventDate)
-            //         .FirstOrDefault();
+            return _dbContext.RaceResults
+                    .Where(raceResult => raceResult.Race.EventDate < DateTime.Now)
+                    .OrderBy(raceResult => raceResult.Race.EventDate)
+                    .FirstOrDefault();
         
-            return _dbContext.RaceResults.ToList()[0];
+            // return _dbContext.RaceResults.ToList()[0];
 
         }
 
