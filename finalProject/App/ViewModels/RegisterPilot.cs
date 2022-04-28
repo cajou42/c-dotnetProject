@@ -21,6 +21,7 @@ namespace App.ViewModels
         [MaxLength(30, ErrorMessage = "Trop long")]
         public string? PilotEmail { get; set; }
 
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Mot de passe requis pour le pilote")]
         [MinLength(8, ErrorMessage = "Nom trop court ! Min : 8")]
         public string? PilotPassword { get; set; }

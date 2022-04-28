@@ -7,24 +7,25 @@ using App.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using App.Data;
-using App.data.Repositories;
+using App.Data.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+
 
 namespace App.Controllers
 {
     public class RacesController : Controller
     {
-        private readonly AppDbContext _dbContext;
-        private readonly IRepository<Race> _raceRepository;
-
-        public RacesController(IRepository<Race> raceRepository, AppDbContext dbContext)
+        private readonly IRaceRepository _raceRepository;
+        private readonly IPilotRepository _pilotRepository;
+        
+        public RacesController(IRaceRepository raceRepository,IPilotRepository pilotRepository)
         {
             _raceRepository = raceRepository;
-            _dbContext = dbContext;
+            _pilotRepository = pilotRepository;
         }
-
+        
         public ActionResult List()
         {
             var races = _raceRepository.GetAll();
@@ -145,7 +146,7 @@ namespace App.Controllers
         public ActionResult Inscription(int id, IFormCollection collection){
             ClaimsPrincipal currentUser = this.User;
             var birth = DateTime.Parse(currentUser.FindFirst(ClaimTypes.DateOfBirth).Value);
-            var user = _dbContext.Pilots.FirstOrDefault(u => u.BirthDay == birth);
+            var user = _pilotRepository.GetPilotWithEmail(currentUser.FindFirst(ClaimTypes.Email).Value);
             var today = DateTime.Today;
             Race race = _raceRepository.Find(id);
             var age = today.Year - birth.Year;
@@ -164,7 +165,7 @@ namespace App.Controllers
                     race.Place --;
                     user.Race = race;
                     _raceRepository.Save();
-                    _dbContext.SaveChanges();
+                    _pilotRepository.Save();
                 }
                 return RedirectToAction(nameof(Index));
             }

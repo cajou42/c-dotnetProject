@@ -3,7 +3,8 @@ namespace App.Models
     public class RaceResult
     {
         public int Id { get; set; }
-        public Race Race { get; set; }
-        public List<ResultLine> ResultLines { get; set; }
+        public virtual Race Race { get; set; }
+        public virtual List<ResultLine> ?ResultLines { get; set; }
+
     }
 }

@@ -1,8 +1,58 @@
-﻿@{
+﻿@model App.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/carrousel.css" asp-append-version="true" />
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<table class="table">
+        <tr>
+            <td>
+                Temps avant la prochaine courses :  @Model.TimeNextRace
+            </td>
+        </tr>
+</table>
+
+<table class="table">
+    Résultat de la derniere courses :
+        <tr>
+            <td>
+                Nom :  @Model.LastRaceResult.Race.Name
+            </td>
+        </tr>
+        @foreach (var resultLines in @Model.LastRaceResult.ResultLines) {
+        <tr>
+            <td>
+                @resultLines.Pilot.FirstName @resultLines.Pilot.LastName 
+            </td>
+            <td>
+                @resultLines.Rank
+            </td>
+            
+        </tr>
+        }
+        <tr>
+            <td>
+                Temps avant la prochaine courses :  @Model.TimeNextRace
+            </td>
+        </tr>
+</table>
+
+<div class="container">
+@foreach (var item in Model.RaceList) {
+
+      <div class="card">
+    <h3 class="title">@Html.DisplayFor(modelItem => item.Name)</h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <h5>@item.EventDate.ToShortDateString()</h5>
+      <div class="filledbar"></div>
+    </div>
+    </div>
+}
+    </tbody>
+</table>

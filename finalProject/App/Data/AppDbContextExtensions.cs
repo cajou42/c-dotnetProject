@@ -46,27 +46,36 @@ namespace App.Data
                 }
             };
             dbContext.Car.AddRange(car);
-
-                        var race = new List<Race>()
+            
+            var races = new List<Race>()
             {
                 new Race()
                 {
                     Id = 1,
-                    Name = "test",
-                    EventDate = new DateTime(2022,05,01),
-                    Place = 15,
+                    Name = "Sonic Racing",
+                    EventDate = new DateTime(2022,05,30)
                 },
-                
                 new Race()
                 {
                     Id = 2,
-                    Name = "une bonne course",
-                    EventDate = new DateTime(2022,06,01),
-                    Place = 15,
+                    Name = "Crash Bandicoot",
+                    EventDate = new DateTime(2022,08,24)
+                },
+                new Race()
+                {
+                    Id = 3,
+                    Name = "Mario Kart",
+                    EventDate = new DateTime(2022,03,12)
+                },
+                new Race()
+                {
+                    Id = 4,
+                    Name = "Les fous du volant",
+                    EventDate = new DateTime(2022,05,28)
                 }
             };
 
-            dbContext.Races.AddRange(race);
+            dbContext.Races.AddRange(races);
 
             HashAlgorithm sha = SHA256.Create();
             byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes("test"));
@@ -82,7 +91,7 @@ namespace App.Data
                     Email = "Jean.Dupond@gmail.com",
                     Password = str,
                     Car = car[1],
-                    Race = race[0]
+                    Race = races[0]
                 },
                 new Pilot()
                 {
@@ -91,9 +100,9 @@ namespace App.Data
                     LastName = "Clerc",
                     BirthDay = new DateTime(1990,01,01),
                     Email = "Sebastion.Clerc@gmail.com",
-                    Password = "test",
+                    Password = str,
                     Car = car[2],
-                    Race = race[0]
+                    Race = races[0]
                 },
                 new Pilot()
                 {
@@ -102,12 +111,13 @@ namespace App.Data
                     LastName = "Bayrou",
                     BirthDay = new DateTime(1990,01,01),
                     Email = "Francois.Bayrou@gmail.com",
-                    Password = "test",
+                    Password = str,
                     Car = car[0],
-                    Race = race[0]
+                    Race = races[0]
                 }
             };
             dbContext.Pilots.AddRange(pilot);
+
 
 
             var raceResult = new List<RaceResult>()
@@ -115,11 +125,11 @@ namespace App.Data
                 new RaceResult()
                 {
                     Id = 1,
-                    Race = race[0]
+                    Race = races[2],
+
                 }
             };
             dbContext.RaceResults.AddRange(raceResult);
-
             var resultLines = new List<ResultLine>()
             {
                 new ResultLine()
@@ -144,6 +154,8 @@ namespace App.Data
                     RaceResult = raceResult[0]
                 }
             };
+
+
             dbContext.ResultLines.AddRange(resultLines);
             dbContext.SaveChanges();
         }
