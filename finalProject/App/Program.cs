@@ -14,11 +14,13 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
 builder.Services.AddDbContext<AppDbContext>(
     dbContextOptions => dbContextOptions
+        .UseLazyLoadingProxies()
         .UseMySql(connectionString, serverVersion)
         .LogTo(Console.Write, LogLevel.Information)
         .EnableSensitiveDataLogging()
         .EnableDetailedErrors()
 );
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

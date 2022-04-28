@@ -24,13 +24,18 @@
                 Nom :  @Model.LastRaceResult.Race.Name
             </td>
         </tr>
+        @foreach (var resultLines in @Model.LastRaceResult.ResultLines) {
         <tr>
-            @* @foreach (var item in @Model.LastRaceResult.Race.Name) {
             <td>
+                @resultLines.Pilot.FirstName @resultLines.Pilot.LastName 
             </td>
-            } *@
+            <td>
+                @resultLines.Rank
+            </td>
+            
         </tr>
-                <tr>
+        }
+        <tr>
             <td>
                 Temps avant la prochaine courses :  @Model.TimeNextRace
             </td>

@@ -24,9 +24,6 @@ public class HomeController : Controller
         var races = _raceRepository.ThreeNextRaces();
         var lastRaceResult = _raceResultRepository.GetLastRaceResult();
         var timeNextRace = races.First().EventDate - DateTime.Now;
-        Console.WriteLine("================================================================");
-        Console.WriteLine(lastRaceResult.Race);
-        Console.WriteLine("================================================================");
         var HomeViewModel = new HomeViewModel(
             races,
             ToReadableString(timeNextRace),
