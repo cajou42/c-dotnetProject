@@ -264,3 +264,5 @@ C:\Users\louis\c-dotnetProject\finalProject\App\obj\Debug\net6.0\App.dll
 C:\Users\louis\c-dotnetProject\finalProject\App\obj\Debug\net6.0\ref\App.dll
 C:\Users\louis\c-dotnetProject\finalProject\App\obj\Debug\net6.0\App.pdb
 C:\Users\louis\c-dotnetProject\finalProject\App\obj\Debug\net6.0\App.genruntimeconfig.cache
+C:\Users\louis\c-dotnetProject\finalProject\App\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\louis\c-dotnetProject\finalProject\App\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
