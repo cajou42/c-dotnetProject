@@ -1,0 +1,28 @@
+@model App.ViewModels.InscriptionRace
+
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<h1>Inscription</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Inscription">
+            <div class="form-group">
+                <ul>
+                    <h3>Rules</h3>
+                    <li>
+                        <p>have 18 years</p>
+                        <span class="text-danger">@Html.ValidationMessageFor(a => a.age)</span>
+                    </li>
+                    <li>
+                        <p>have a vehicule</p>
+                    </li>
+                </ul>
+                <span class="text-danger">@Html.ValidationMessageFor(a => a.nbParticipants)</span>
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
