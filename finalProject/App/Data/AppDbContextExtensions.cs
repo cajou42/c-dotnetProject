@@ -44,32 +44,80 @@ namespace App.Data
                 }
             };
             dbContext.Car.AddRange(car);
-            
+
+            var categories = new List<Categorie>()
+            {
+                new Categorie() 
+                {
+                    Id = 1,
+                    Name = "Voiture"
+                },
+                new Categorie() 
+                {
+                    Id = 2,
+                    Name = "Camion"
+                },
+                new Categorie() 
+                {
+                    Id = 3,
+                    Name = "Tracteur"
+                }
+            };
+
+            dbContext.Categories.AddRange(categories);
             var races = new List<Race>()
             {
                 new Race()
                 {
                     Id = 1,
                     Name = "Sonic Racing",
-                    EventDate = new DateTime(2022,05,30)
+                    EventDate = new DateTime(2022,05,30),
+                    Hour = new DateTime(2022,05,30).Hour,
+                    Longitude = 13.3f,
+                    Latitude = 43.7f,
+                    Place = 15,
+                    Image = "https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_TeamSonicRacing.jpg",
+                    AgeLimit = 21,
+                    Categories = categories
                 },
                 new Race()
                 {
                     Id = 2,
                     Name = "Crash Bandicoot",
-                    EventDate = new DateTime(2022,08,24)
+                    EventDate = new DateTime(2022,08,24),
+                    Hour = new DateTime(2022,08,24).Hour,
+                    Longitude = 13.3f,
+                    Latitude = 43.7f,
+                    Place = 15,
+                    Image = "https://image.api.playstation.com/cdn/EP0002/CUSA07399_00/bPXMfRCtjGgvIS0BxOWqVsn94MAMLMkE.png",
+                    AgeLimit = 21,
+                    Categories = categories
                 },
                 new Race()
                 {
                     Id = 3,
                     Name = "Mario Kart",
-                    EventDate = new DateTime(2022,03,12)
+                    EventDate = new DateTime(2022,03,12),
+                    Hour = new DateTime(2022,08,24).Hour,
+                    Longitude = 13.3f,
+                    Latitude = 43.7f,
+                    Place = 15,
+                    Image = "https://static.wikia.nocookie.net/mario/images/7/7c/MKT-Ic%C3%B4nePlayStore2.8.png/revision/latest?cb=20210519212100&path-prefix=fr",
+                    AgeLimit = 21,
+                    Categories = categories
                 },
                 new Race()
                 {
                     Id = 4,
                     Name = "Les fous du volant",
-                    EventDate = new DateTime(2022,05,28)
+                    EventDate = new DateTime(2022,05,28),
+                    Hour = new DateTime(2022,05,28).Hour,
+                    Longitude = 13.3f,
+                    Latitude = 43.7f,
+                    Place = 15,
+                    Image = "https://static.wikia.nocookie.net/wikidoublage/images/c/c0/Les_Fous_du_Volant.jpg/revision/latest?cb=20200824112837&path-prefix=fr",
+                    AgeLimit = 21,
+                    Categories = categories
                 }
             };
 

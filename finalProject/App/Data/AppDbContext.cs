@@ -11,6 +11,7 @@ namespace App.Data
 
         public DbSet<RaceResult> RaceResults { get; set; }
         public DbSet<ResultLine> ResultLines { get; set; }
+        public DbSet<Categorie> Categories { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 

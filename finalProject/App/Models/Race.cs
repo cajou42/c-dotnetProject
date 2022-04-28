@@ -13,7 +13,6 @@ namespace App.Models
         public int Place { get; set; } = 15;
         public string Image { get; set; }
         public int AgeLimit { get; set; } = 21;
-        public virtual RaceResult Result { get; set; }
         public virtual List<Categorie> Categories { get; set; }
 
     }

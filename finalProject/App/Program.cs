@@ -81,8 +81,8 @@ app.MapControllerRoute(
 
 using (var scope = app.Services.CreateScope())
 {
-    // scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
-    // scope.ServiceProvider.GetRequiredService<AppDbContext>().Seed();
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Seed();
     
     // TODO SEED DATA
 }
