@@ -23,6 +23,11 @@ namespace App.Data.Repositories
         IEnumerable<Race> ThreeNextRaces();
         Race LastRace();
     }
+    public interface IPilotRepository : IRepository<Pilot>
+    {
+        Pilot GetPilotWithEmailAndPassword(String email, String password);
+        Pilot GetPilotWithBirthday(DateTime birthday);
+    }
 
 
 }

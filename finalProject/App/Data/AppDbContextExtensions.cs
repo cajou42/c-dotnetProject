@@ -44,67 +44,7 @@ namespace App.Data
                 }
             };
             dbContext.Car.AddRange(car);
-
-                        var race = new List<Race>()
-            {
-                new Race()
-                {
-                    Id = 1,
-                    Name = "test",
-                    EventDate = new DateTime(2022,05,01),
-                    Place = 15,
-                },
-                
-                new Race()
-                {
-                    Id = 2,
-                    Name = "une bonne course",
-                    EventDate = new DateTime(2022,06,01),
-                    Place = 15,
-                }
-            };
-
-            dbContext.Races.AddRange(race);
-
-            var pilot = new List<Pilot>()
-            {
-                new Pilot() 
-                {
-                    Id = 1,
-                    FirstName = "Jean",
-                    LastName = "Dupond",
-                    BirthDay = new DateTime(1990,01,01),
-                    Email = "Jean.Dupond@gmail.com",
-                    Password = "test",
-                    Car = car[1],
-                    Race = race[0]
-                },
-                new Pilot()
-                {
-                    Id = 2,
-                    FirstName = "Sebastien",
-                    LastName = "Clerc",
-                    BirthDay = new DateTime(1990,01,01),
-                    Email = "Sebastion.Clerc@gmail.com",
-                    Password = "test",
-                    Car = car[2],
-                    Race = race[0]
-                },
-                new Pilot()
-                {
-                    Id = 3,
-                    FirstName = "Francois",
-                    LastName = "Bayrou",
-                    BirthDay = new DateTime(1990,01,01),
-                    Email = "Francois.Bayrou@gmail.com",
-                    Password = "test",
-                    Car = car[0],
-                    Race = race[0]
-                }
-            };
-            dbContext.Pilots.AddRange(pilot);
-
-<<<<<<< HEAD
+            
             var races = new List<Race>()
             {
                 new Race()
@@ -134,19 +74,54 @@ namespace App.Data
             };
 
             dbContext.Races.AddRange(races);
-=======
->>>>>>> master
+
+            var pilot = new List<Pilot>()
+            {
+                new Pilot() 
+                {
+                    Id = 1,
+                    FirstName = "Jean",
+                    LastName = "Dupond",
+                    BirthDay = new DateTime(1990,01,01),
+                    Email = "Jean.Dupond@gmail.com",
+                    Password = "test",
+                    Car = car[1],
+                    Race = races[0]
+                },
+                new Pilot()
+                {
+                    Id = 2,
+                    FirstName = "Sebastien",
+                    LastName = "Clerc",
+                    BirthDay = new DateTime(1990,01,01),
+                    Email = "Sebastion.Clerc@gmail.com",
+                    Password = "test",
+                    Car = car[2],
+                    Race = races[0]
+                },
+                new Pilot()
+                {
+                    Id = 3,
+                    FirstName = "Francois",
+                    LastName = "Bayrou",
+                    BirthDay = new DateTime(1990,01,01),
+                    Email = "Francois.Bayrou@gmail.com",
+                    Password = "test",
+                    Car = car[0],
+                    Race = races[0]
+                }
+            };
+            dbContext.Pilots.AddRange(pilot);
+
+
 
             var raceResult = new List<RaceResult>()
             {
                 new RaceResult()
                 {
                     Id = 1,
-<<<<<<< HEAD
                     Race = races[2],
-=======
-                    Race = race[0]
->>>>>>> master
+
                 }
             };
             dbContext.RaceResults.AddRange(raceResult);

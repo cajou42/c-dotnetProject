@@ -9,6 +9,6 @@ namespace App.Models
         public string? Email { get; set; }
         public string? Password { get; set; }
         public virtual Car? Car { get; set; }
-        public Race? Race {get; set;}
+        public virtual Race? Race {get; set;}
     }
 }
