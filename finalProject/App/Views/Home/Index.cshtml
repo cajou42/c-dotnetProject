@@ -46,6 +46,7 @@
       <div class="emptybar"></div>
       <h5>@item.EventDate.ToShortDateString()</h5>
       <div class="filledbar"></div>
+      <div>@Html.ActionLink("Details", "Details", new { item.Id })</div>
     </div>
     </div>
 }
