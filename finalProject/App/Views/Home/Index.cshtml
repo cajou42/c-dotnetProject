@@ -46,7 +46,7 @@
       <div class="emptybar"></div>
       <h5>@item.EventDate.ToShortDateString()</h5>
       <div class="filledbar"></div>
-      <div>@Html.ActionLink("Details", "Details", new { item.Id })</div>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Races" asp-action="Details/" asp-route-id=@item.Id }>Details</a>
     </div>
     </div>
 }
