@@ -28,6 +28,21 @@
                 <span asp-validation-for="RacePlace" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RaceImage" class="control-label"></label>
+                <input asp-for="RaceImage" class="form-control" />
+                <span asp-validation-for="RaceImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RaceLongitude" class="control-label"></label>
+                <input asp-for="RaceLongitude" class="form-control" />
+                <span asp-validation-for="RaceLongitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RaceLatitude" class="control-label"></label>
+                <input asp-for="RaceLatitude" class="form-control" />
+                <span asp-validation-for="RaceLatitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

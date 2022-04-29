@@ -76,7 +76,14 @@ namespace App.Controllers
                         new Race()
                         {
                             Name = race.RaceName,
-                            EventDate = race.RaceEventDate
+                            EventDate = race.RaceEventDate,
+                            Hour = race.RaceEventDate.Hour,
+                            Longitude = race.RaceLongitude,
+                            Latitude = race.RaceLatitude,
+                            Place = race.RacePlace,
+                            Image = race.RaceImage,
+                            AgeLimit = 21,
+                            Categories = null
                         }
                         );
                         _raceRepository.Save();

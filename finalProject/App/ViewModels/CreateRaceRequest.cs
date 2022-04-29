@@ -16,5 +16,8 @@ namespace App.ViewModels
         [Required(ErrorMessage = "il faut un nombre de participants")]
         [Range(10, 30, ErrorMessage = "Nombre de participants invalide")]
         public int RacePlace { get; set; }
+        public int RaceLongitude { get; set; }
+        public int RaceLatitude { get; set; }
+        public string RaceImage { get; set; }
     }
 }
